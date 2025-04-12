@@ -338,7 +338,7 @@
 }
 
 .login-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 12px 24px;
   border: none;
@@ -473,7 +473,7 @@
 }
 
 .active .status-dot {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .inactive .status-dot {
@@ -485,7 +485,8 @@
   gap: 5px;
 }
 
-.view-button, .edit-button {
+.view-button,
+.edit-button {
   padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
@@ -503,7 +504,8 @@
   background-color: white;
 }
 
-.view-button:hover, .edit-button:hover {
+.view-button:hover,
+.edit-button:hover {
   background-color: #4c75cf;
   color: white;
 }
@@ -583,7 +585,7 @@
 
 .form-col {
   flex: 0 0 50%;
-  max-width: 50%;
+  max-width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   box-sizing: border-box;
@@ -607,4 +609,21 @@
 .form-actions .login-button {
   width: 120px;
   margin-left: 10px;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f;
 }

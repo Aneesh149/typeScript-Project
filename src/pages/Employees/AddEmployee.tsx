@@ -245,8 +245,8 @@ const AddEmployee: React.FC = () => {
               <div className="form-actions">
                 <button
                   type="button"
-                  className="view-button"
-                  onClick={() => navigate('/employees')}
+                  className='cancel-button'
+                  onClick={() => navigate(-1)}
                 >
                   Cancel
                 </button>
