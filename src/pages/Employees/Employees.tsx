@@ -7,7 +7,7 @@ import ActionButtons from '../../components/Common/ActionButtons';
 
 const Employees: React.FC = () => {
     const navigate = useNavigate();
-    const [employees, setEmployees] = useState([
+    const employees = [
         {
             id: '1',
             name: 'Test 1',
@@ -38,7 +38,7 @@ const Employees: React.FC = () => {
             lastLogin: '2023-10-15 11:45 AM',
             status: 'Active'
         }
-    ]);
+    ];
 
     const TableHeads = [
         "Employee ID",

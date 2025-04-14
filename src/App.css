@@ -611,7 +611,7 @@
   margin-left: 10px;
 }
 
-.cancel-button {
+/* .cancel-button {
   background-color: #f44336;
   color: white;
   border: none;
@@ -626,4 +626,10 @@
 
 .cancel-button:hover {
   background-color: #d32f2f;
+} */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
