@@ -1,8 +1,8 @@
 import React from 'react';
-import { useForm, Controller, Resolver } from 'react-hook-form';
+import { useForm, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../../components/Common/Navbar';
 import Sidebar from '../../components/Common/Sidebar';
 import CustomInput from '../../components/Common/CustomInput';
@@ -20,33 +20,37 @@ const schema = yup.object({
   status: yup.string().required('Status is required'),
 });
 
-// Type for form values
-
-// interface FormValues {
-//   employeeId: string;
-//   fullName: string;
-//   email: string;
-//   contactNumber: string;
-//   department: string;
-//   designation: string;
-//   status: string;
-// }
-
 type FormValues = yup.InferType<typeof schema>;
+
+interface EmployeeData {
+  employeeId: string;
+  fullName: string;
+  email: string;
+  contactNumber: string;
+  department: string;
+  designation: string;
+  status: string;
+  id?: string;
+  lastLogin?: string;
+}
 
 const AddEmployee: React.FC = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  
+  const isEditMode = Boolean(location.state?.employee);
+  const employeeData: EmployeeData | undefined = location.state?.employee;
+  
   const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
     resolver: yupResolver(schema) as Resolver<FormValues>,
     defaultValues: {
-      employeeId: '',
-      fullName: '',
-      email: '',
-      contactNumber: '',
-      department: '',
-      designation: '',
-      status: 'Active',
+      employeeId: employeeData?.employeeId || '',
+      fullName: employeeData?.fullName || '',
+      email: employeeData?.email || '',
+      contactNumber: employeeData?.contactNumber || '',
+      department: employeeData?.department || '',
+      designation: employeeData?.designation || '',
+      status: employeeData?.status || 'Active',
     }
   });
 
@@ -70,8 +74,21 @@ const AddEmployee: React.FC = () => {
   ];
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
-    // alert('Employee added successfully!');
+    // console.log(data);
+    if (isEditMode) {
+      const updatedEmployee = {
+        ...data,
+        id: employeeData?.id,
+        lastLogin: employeeData?.lastLogin
+      };
+      console.log('Updated employee data:', updatedEmployee);
+      // call an API to update the employee
+    } else {
+      // creating a new employee
+      console.log('New employee data:', data);
+      // call an API to create the employee
+    }
+    
     navigate('/employees');
   };
 
@@ -83,7 +100,7 @@ const AddEmployee: React.FC = () => {
         <main className="main-content">
           <div className="add-employee-wrapper">
             <div className="page-header">
-              <h1 className="page-title">Add Employee</h1>
+              <h1 className="page-title">{isEditMode ? 'Edit Employee' : 'Add Employee'}</h1>
             </div>
 
             <form className="employee-form" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -97,6 +114,7 @@ const AddEmployee: React.FC = () => {
                     required
                     placeholder="Enter employee ID"
                     error={errors.employeeId?.message}
+                    isEditable={isEditMode}
                   />
                 </div>
 
@@ -189,7 +207,7 @@ const AddEmployee: React.FC = () => {
                   type="submit"
                   className="save-button"
                 >
-                  Save
+                  {isEditMode ? 'Update' : 'Save'}
                 </button>
               </div>
             </form>

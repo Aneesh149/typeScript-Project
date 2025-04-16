@@ -15,7 +15,7 @@ interface CommonTooltipProps {
 const CommonTooltip: React.FC<CommonTooltipProps> = ({
   tooltip,
   children,
-  tooltipClass = "bg-gray-900 dark:bg-gray-700 text-custom-white",
+  tooltipClass = "bg-gray-900 dark:bg-gray-700 text-white",
 }) => {
   const parentRef = useRef<HTMLDivElement | null>(null);
   const [tooltipCoords, setTooltipCoords] = useState<TooltipCoords>({ left: 0, top: 0 });
@@ -37,7 +37,7 @@ const CommonTooltip: React.FC<CommonTooltipProps> = ({
   const tooltipElement =
     visible && tooltip ? (
       <span
-        className={`${tooltipClass} text-xs shadow-sm font-semibold z-[999] transition p-1 rounded absolute`}
+        className={`${tooltipClass} text-xs text-white shadow-sm font-semibold z-[999] transition p-1 px-2 rounded absolute`}
         style={{
           left: tooltipCoords.left,
           top: tooltipCoords.top,

@@ -5,15 +5,15 @@ interface TooltipContent {
 export const tooltip: TooltipContent = {
     //Employee Module
     user_name: "Enter Name",
+    employeeId: "Enter Employee ID",
     password: "Enter password",
-    email: "Enter Correct Email",
-    mobile_number: "Enter Mobile Number",
+    email: "Enter Email",
+    contactNumber: "Enter Mobile Number",
     date_of_birth: "Select a Date",
     gender: "Select a Gender",
-    department: "Create Department first from setting Tab.",
+    department: "Select Department",
     fullName: "Enter Full Name",
-    bugTitle: "Enter Bug Title",
     designation: "Select employee's role or position",
-    status: "Active: Currently employed, Inactive: No longer with company",
+    status: "Select Status",
   };
   

@@ -3,7 +3,6 @@ import { Controller, Control, FieldValues, FieldPath } from "react-hook-form";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineVisibility } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-// import PhoneInput from "react-phone-input-2";
 import CommonTooltip from "./CommonTooltip";
 import { tooltip } from "../../constant/TooltipContent";
 
@@ -46,10 +45,10 @@ const CustomInput = <
   max = "",
   min = "",
   icon = "",
-  rowLimit = 3
+  rowLimit = 3    
 }: CustomInputProps<TFieldValues, TName>) => {
   const [showPassword, setShowPassword] = useState(false);
-  const tooltip_content = typeof name === 'string' && name in tooltip ? tooltip[name as keyof typeof tooltip] : undefined;
+  const tooltip_content = name && tooltip[name];
 
   return inputType === "text-area" ? (
     <>
@@ -61,7 +60,7 @@ const CustomInput = <
           {label}
           {required && <span className="text-red-500"> *</span>}
         </span>
-        {showInfoButton && tooltip_content && (
+        {showInfoButton && (
           <CommonTooltip tooltip={tooltip_content}>
             <BsInfoCircle />
           </CommonTooltip>
@@ -84,9 +83,8 @@ const CustomInput = <
               onBlur={onBlur}
               value={value || ''}
               readOnly={isEditable}
-              className={`border px-3 py-2 mt-2 pr-6 outline-none w-full rounded-md resize-none text-justify focus:border-custom-blue ${
-                isEditable ? "bg-gray-100 cursor-not-allowed" : ""
-              } ${classname}`}
+              className={`border px-3 py-2 mt-2 pr-6 outline-none w-full rounded-md resize-none text-justify focus:border-custom-blue ${isEditable ? "bg-gray-100 cursor-not-allowed" : ""
+                } ${classname}`}
             />
           )}
         />
@@ -103,7 +101,7 @@ const CustomInput = <
           {label}
           {required && <span className="text-red-500"> *</span>}
         </span>
-        {showInfoButton && tooltip_content && (
+        {showInfoButton && (
           <CommonTooltip tooltip={tooltip_content}>
             <BsInfoCircle />
           </CommonTooltip>
@@ -148,9 +146,8 @@ const CustomInput = <
               readOnly={isEditable}
               max={max}
               min={min}
-              className={`border px-3 py-2 mt-2 pr-5 text-sm outline-none w-full rounded-md focus:border-custom-blue ${
-                isEditable ? "bg-gray-100 cursor-not-allowed" : ""
-              } ${classname}`}
+              className={`border px-3 py-2 mt-2 pr-5 text-sm outline-none w-full rounded-md focus:border-custom-blue ${isEditable ? "bg-gray-100 cursor-not-allowed" : ""
+                } ${classname}`}
             />
           )}
         />
