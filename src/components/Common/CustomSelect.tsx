@@ -25,6 +25,7 @@ interface CustomSelectProps<
   labelClassName?: string;
   classname?: string;
   isEditable?: boolean;
+  disabled?: boolean;
   showInfoButton?: boolean;
   options: OptionType[];
   icon?: ReactNode;
@@ -49,6 +50,7 @@ const CustomSelect = <
   labelClassName = "",
   classname = "",
   isEditable = false,
+  disabled = false,
   showInfoButton = true,
   options = [],
   icon,
@@ -61,7 +63,7 @@ const CustomSelect = <
 }: CustomSelectProps<TFieldValues, TName>) => {
   const [isOpen, setIsOpen] = useState(false);
   const tooltip_content = typeof name === 'string' && name in tooltip ? tooltip[name as keyof typeof tooltip] : undefined;
-  
+
   const handleSelectClick = () => {
     if (!isEditable) {
       setIsOpen(!isOpen);
@@ -106,18 +108,17 @@ const CustomSelect = <
                   setIsOpen(false);
                 }}
                 value={value || ""}
-                disabled={isEditable}
+                disabled={isEditable || disabled}
                 onClick={handleSelectClick}
-                className={`custom-select ${
-                  isEditable ? "custom-input-disabled" : ""
-                } ${isOpen ? "custom-select-open" : ""} ${classname}`}
+                className={`custom-select ${isEditable || disabled ? "custom-input-disabled" : ""
+                  } ${isOpen ? "custom-select-open" : ""} ${classname}`}
               >
                 <option value="" disabled>
                   {placeholder}
                 </option>
                 {options.map((option) => (
-                  <option 
-                    key={option.value} 
+                  <option
+                    key={option.value}
                     value={option.value}
                     className={optionClassName}
                   >
@@ -125,7 +126,7 @@ const CustomSelect = <
                   </option>
                 ))}
               </select>
-              
+
               {/* Custom styled dropdown - can be enabled for advanced styling if needed */}
               {/* {isOpen && !isEditable && (
                 <div className="custom-select-dropdown">

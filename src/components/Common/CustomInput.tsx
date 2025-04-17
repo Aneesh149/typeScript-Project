@@ -20,6 +20,7 @@ interface CustomInputProps<
   labelClassName?: string;
   classname?: string;
   isEditable?: boolean;
+  disabled?: boolean;
   showInfoButton?: boolean;
   max?: string | number;
   min?: string | number;
@@ -41,11 +42,12 @@ const CustomInput = <
   labelClassName = "block text-custom-black",
   classname = "",
   isEditable = false,
+  disabled = false,
   showInfoButton = true,
   max = "",
   min = "",
   icon = "",
-  rowLimit = 3    
+  rowLimit = 3
 }: CustomInputProps<TFieldValues, TName>) => {
   const [showPassword, setShowPassword] = useState(false);
   const tooltip_content = name && tooltip[name];
@@ -82,8 +84,8 @@ const CustomInput = <
               onChange={onChange}
               onBlur={onBlur}
               value={value || ''}
-              readOnly={isEditable}
-              className={`border px-3 py-2 mt-2 pr-6 outline-none w-full rounded-md resize-none text-justify focus:border-custom-blue ${isEditable ? "bg-gray-100 cursor-not-allowed" : ""
+              readOnly={isEditable || disabled}
+              className={`border px-3 py-2 mt-2 pr-6 outline-none w-full rounded-md resize-none text-justify focus:border-custom-blue ${isEditable || disabled ? "bg-gray-100 cursor-not-allowed" : ""
                 } ${classname}`}
             />
           )}
@@ -143,10 +145,10 @@ const CustomInput = <
               onChange={onChange}
               onBlur={onBlur}
               value={value || ''}
-              readOnly={isEditable}
+              readOnly={isEditable || disabled}
               max={max}
               min={min}
-              className={`border px-3 py-2 mt-2 pr-5 text-sm outline-none w-full rounded-md focus:border-custom-blue ${isEditable ? "bg-gray-100 cursor-not-allowed" : ""
+              className={`border px-3 py-2 mt-2 pr-5 text-sm outline-none w-full rounded-md focus:border-custom-blue ${isEditable || disabled ? "bg-gray-100 cursor-not-allowed" : ""
                 } ${classname}`}
             />
           )}
