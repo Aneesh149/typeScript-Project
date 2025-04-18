@@ -25,19 +25,19 @@ const EmployeeView: React.FC<EmployeeViewProps> = ({ employee }) => {
 
   const handleEditClick = () => {
     // Create a copy of the employee to pass as the employee prop, not ViewEmployee
-    navigate('/add-employee', { 
-      state: { 
+    navigate('/add-employee', {
+      state: {
         employee: {
-          id: employee.id,
-          employeeId: employee.employeeId,
-          fullName: employee.fullName,
-          email: employee.email,
-          contactNumber: employee.contactNumber,
-          department: employee.department,
-          designation: employee.designation,
-          status: employee.status,
-          lastLogin: employee.lastLogin
-        } 
+          id: employee?.id,
+          employeeId: employee?.employeeId,
+          fullName: employee?.fullName,
+          email: employee?.email,
+          contactNumber: employee?.contactNumber,
+          department: employee?.department,
+          designation: employee?.designation,
+          status: employee?.status,
+          lastLogin: employee?.lastLogin
+        }
       }
     });
   };
@@ -58,46 +58,46 @@ const EmployeeView: React.FC<EmployeeViewProps> = ({ employee }) => {
           {employee.status}
         </div>
       </div>
-      
+
       <div className="employee-details grid grid-cols-1 md:grid-cols-2 gap-6">
-        <CustomView 
-          label="Employee ID" 
-          value={employee.employeeId} 
+        <CustomView
+          label="Employee ID"
+          value={employee.employeeId}
         />
-        
-        <CustomView 
-          label="Full Name" 
-          value={employee.fullName} 
+
+        <CustomView
+          label="Full Name"
+          value={employee.fullName}
         />
-        
-        <CustomView 
-          label="Email" 
-          value={employee.email} 
+
+        <CustomView
+          label='Email'
+          value={employee.email}
         />
-        
-        <CustomView 
-          label="Contact Number" 
-          value={employee.contactNumber} 
+
+        <CustomView
+          label="Contact Number"
+          value={employee.contactNumber}
         />
-        
-        <CustomView 
-          label="Department" 
-          value={employee.department} 
+
+        <CustomView
+          label="Department"
+          value={employee.department}
         />
-        
-        <CustomView 
-          label="Designation" 
-          value={employee.designation} 
+
+        <CustomView
+          label="Designation"
+          value={employee.designation}
         />
 
         {employee.lastLogin && (
-          <CustomView 
-            label="Last Login" 
-            value={employee.lastLogin} 
+          <CustomView
+            label="Last Login"
+            value={employee.lastLogin}
           />
         )}
       </div>
-      
+
       <div className="form-actions mt-8">
         <button
           type="button"

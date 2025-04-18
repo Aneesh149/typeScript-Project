@@ -1,9 +1,11 @@
 // import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Common/Navbar';
 import Sidebar from '../../components/Common/Sidebar';
 import StatusIndicator from '../../components/Common/StatusIndicator';
 import ActionButtons from '../../components/Common/ActionButtons';
+import { IoMdSearch } from 'react-icons/io';
 
 interface Employee {
     id: string;
@@ -19,6 +21,9 @@ interface Employee {
 
 const Employees: React.FC = () => {
     const navigate = useNavigate();
+    const [searchString, setSearchString] = useState<string>('');
+    const [tableData, setTableData] = useState<Employee[]>([]);
+
     const employees: Employee[] = [
         {
             id: '1',
@@ -132,6 +137,10 @@ const Employees: React.FC = () => {
         },
     ];
 
+    useEffect(() => {
+        setTableData(employees);
+    }, []);
+
     const TableHeads = [
         "Employee ID",
         "Name",
@@ -144,6 +153,25 @@ const Employees: React.FC = () => {
         "Actions",
     ];
 
+    const filterEmployees = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        setSearchString(val);
+
+        if (val.length > 0) {
+            const filteredEmployees = employees.filter(
+                (item) =>
+                    item.fullName.toLowerCase().includes(val.toLowerCase()) ||
+                    item.email.toLowerCase().includes(val.toLowerCase()) ||
+                    item.contactNumber.includes(val) ||
+                    item.department.toLowerCase().includes(val.toLowerCase()) ||
+                    item.designation.toLowerCase().includes(val.toLowerCase())
+                // item.status.toLowerCase().includes(val.toLowerCase())
+            );
+            setTableData(filteredEmployees);
+        } else {
+            setTableData(employees);
+        }
+    };
 
     // const getDepartmentName = (id: string): string => {
     //     const departments: Record<string, string> = {
@@ -182,12 +210,25 @@ const Employees: React.FC = () => {
                     <div className="employees-wrapper">
                         <div className="page-header">
                             <h1 className="page-title">Employees</h1>
-                            <button
-                                className="add-employee-btn"
-                                onClick={() => navigate('/add-employee')}
-                            >
-                                Add Employee
-                            </button>
+                            <div className="flex items-center gap-4">
+                                <div className="relative">
+                                    <IoMdSearch className="absolute z-10 top-3 left-2 text-slate-400" />
+                                    <input
+                                        name="searchString"
+                                        type="text"
+                                        placeholder="Search"
+                                        onChange={filterEmployees}
+                                        value={searchString}
+                                        className="bg-white px-8 py-2 text-sm border outline-none rounded-md w-64"
+                                    />
+                                </div>
+                                <button
+                                    className="add-employee-btn"
+                                    onClick={() => navigate('/add-employee')}
+                                >
+                                    Add Employee
+                                </button>
+                            </div>
                         </div>
                         <div className="table-container">
                             <table className="employee-table">
@@ -200,7 +241,7 @@ const Employees: React.FC = () => {
                                 </thead>
 
                                 <tbody>
-                                    {employees.map((employee) => (
+                                    {tableData.map((employee) => (
                                         <tr key={employee?.id}>
                                             <td>{employee?.employeeId}</td>
                                             <td className="name-cell">
@@ -225,6 +266,13 @@ const Employees: React.FC = () => {
                                             </td>
                                         </tr>
                                     ))}
+                                    {tableData.length === 0 && (
+                                        <tr>
+                                            <td colSpan={TableHeads.length} className="text-center py-4 font-bold">
+                                                No Employees Found 😢
+                                            </td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>

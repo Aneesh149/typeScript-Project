@@ -109,12 +109,8 @@ const Employees = () => {
           item?.user_name?.toLowerCase().includes(val.toLowerCase()) ||
           item?.email?.toLowerCase() === val.toLowerCase() ||
           item?.mobile_number?.toString().includes(val.toLowerCase()) ||
-          item?.department?.department_name
-            ?.toLowerCase()
-            .includes(val.toLowerCase()) ||
-          item?.designation?.designation
-            ?.toLowerCase()
-            .includes(val.toLowerCase())
+          item?.department?.department_name?.toLowerCase().includes(val.toLowerCase()) ||
+          item?.designation?.designation?.toLowerCase().includes(val.toLowerCase())
       );
       setTableData(filterCompanies);
     } else {

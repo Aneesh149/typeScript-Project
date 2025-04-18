@@ -62,7 +62,6 @@ const AddEmployee: React.FC = () => {
     }
   }, [employeeData, viewEmployeeData]);
 
-  // Define department and designation options using labels directly as values
   const departments: OptionType[] = [
     { value: 'Engineering', label: 'Engineering' },
     { value: 'Marketing', label: 'Marketing' },
@@ -142,10 +141,10 @@ const AddEmployee: React.FC = () => {
               label="Email"
               inputType="email"
               control={control}
-              required={!isEditable}
+              required
               placeholder="Enter email address"
               error={errors.email?.message}
-              isEditable={isEditable}
+            // isEditable={isEditable}
             />
           </div>
 
